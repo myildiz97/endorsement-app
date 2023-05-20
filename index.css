@@ -35,9 +35,9 @@ html, body {
     overflow: hidden;
     resize: none;
     background-color: #fca311;
-    color: #ffffff;
+    color: #023047;
     font-family: 'Work Sans', sans-serif;
-    letter-spacing: 1.5px;
+    letter-spacing: 3px;
 }
 
 #publish-btn {
