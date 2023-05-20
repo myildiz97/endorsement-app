@@ -12,11 +12,22 @@ const endorsementsInDB = ref(database, "endorsementsList")
 const textarea = document.getElementById("textarea")
 const btn = document.getElementById("publish-btn")
 const endorsements = document.getElementById("endorsements")
+const text1 = document.getElementById("text1")
+const text2 = document.getElementById("text2")
 
 btn.addEventListener("click", function() {
     let inputValue = textarea.value
-    push(endorsementsInDB, inputValue)
+    if (inputValue.length < 5) {
+        alert("You must enter a message at least 5 characters long.")
+    } else {
+        let text1Value = text1.value
+        let text2Value = text2.value
+        const arr = [inputValue, text1Value, text2Value]
+        push(endorsementsInDB, arr)
+    }
     textarea.value = ""
+    text1.value = ""
+    text2.value = ""
 })
 
 onValue(endorsementsInDB, function(snapshot) {
@@ -31,7 +42,7 @@ onValue(endorsementsInDB, function(snapshot) {
         }  
 
     } else {
-        endorsements.innerHTML = "No endorsements here... yet"
+        endorsements.innerHTML = "No endorsement here... yet"
     }
 })
 
@@ -39,14 +50,39 @@ function appendItem(item) {
     let itemId = item[0]
     let itemValue = item[1]
 
-    let newEl = document.createElement("div")
-    newEl.textContent = itemValue
-    newEl.className = "endorsement"
+    for (let i = 1 ; i <= 2; i++) {
+        if (itemValue[i].length < 1) {
+            itemValue[i] = "Unknown"
+        } else {
+            i === 1 ? itemValue[i] = "From " + itemValue[i] : itemValue[i] = "To " + itemValue[i]
+        }
+    }
 
-    newEl.addEventListener("click", function() {
+    let mainDiv = document.createElement("div")
+    mainDiv.className = "endorsement"
+    mainDiv.innerHTML = `
+        <div class="like">
+            <span style="font-weight: bold">${itemValue[2]}</span>
+            <button class="del-like" id="like"><img src="./heart-solid.svg"></button>
+            <span id="count">0</span>
+        </div>
+        <div>${itemValue[0]}</div>
+        <div class="del">
+            <span style="font-weight: bold">${itemValue[1]}</span>
+            <button class="del-like" id="del"><img src="./trash-solid.svg"></button>
+        </div> 
+    `
+
+    function handleClickDel() {
         let exactLocationOfItemInDB = ref(database, `endorsementsList/${itemId}`)
         remove(exactLocationOfItemInDB)
-    })
+    }
 
-    endorsements.append(newEl)
+    mainDiv.querySelector('#del').addEventListener('click', handleClickDel);
+
+    function handleClickLike() {
+
+    }
+
+    endorsements.append(mainDiv)
 }
