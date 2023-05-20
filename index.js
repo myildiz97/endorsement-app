@@ -13,11 +13,12 @@ const textarea = document.getElementById("textarea")
 const btn = document.getElementById("publish-btn")
 const endorsements = document.getElementById("endorsements")
 
+textarea.style.color = "#000000";
+
 btn.addEventListener("click", function() {
     let inputValue = textarea.value
     push(endorsementsInDB, inputValue)
     textarea.value = ""
-    console.log("pushed")
 })
 
 onValue(endorsementsInDB, function(snapshot) {
@@ -28,13 +29,11 @@ onValue(endorsementsInDB, function(snapshot) {
         
         for (let i = 0; i < itemsArray.length; i++) {
             let currentItem = itemsArray[i]
-            let currentItemID = currentItem[0]
-            let currentItemValue = currentItem[1]
-            
             appendItem(currentItem)
-        }    
+        }  
+
     } else {
-        endorsements.innerHTML = "No items here... yet"
+        endorsements.innerHTML = "No endorsements here... yet"
     }
 })
 
