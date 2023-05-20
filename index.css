@@ -88,5 +88,6 @@ html, body {
     color: #000000;
     font-family: Arial, Helvetica, sans-serif;
     overflow-wrap: break-word;
+    cursor: pointer;
     /* word-wrap: break-word; */
 }
