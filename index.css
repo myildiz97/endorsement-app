@@ -29,8 +29,9 @@ html, body {
     margin: 10px 0;
     border: 0;
     padding: 10px 5px;
-    height: 150px;
+    min-height: 150px;
     word-wrap: break-word;
+    overflow-wrap: break-word;
     word-break: break-all;
     overflow: hidden;
     resize: none;
