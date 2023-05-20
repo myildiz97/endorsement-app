@@ -137,13 +137,25 @@ html, body {
 }
 
 
-#del, #like {
+#del, #like, #dislike {
     border: none;
     background: none;
     cursor: pointer;
+}
+
+#del, #like {
     margin-left: auto;
+}
+
+#del {
+    margin-right: 20px;
 }
 
 .del-like > img {
     width: 15px;
+}
+
+#count {
+    margin-right: 5px;
+    margin-left: 5px;
 }
