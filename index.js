@@ -13,8 +13,6 @@ const textarea = document.getElementById("textarea")
 const btn = document.getElementById("publish-btn")
 const endorsements = document.getElementById("endorsements")
 
-textarea.style.color = "#000000";
-
 btn.addEventListener("click", function() {
     let inputValue = textarea.value
     push(endorsementsInDB, inputValue)
