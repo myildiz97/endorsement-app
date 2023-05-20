@@ -64,7 +64,8 @@ function appendItem(item) {
         <div class="like">
             <span style="font-weight: bold">${itemValue[2]}</span>
             <button class="del-like" id="like"><img src="./heart-solid.svg"></button>
-            <span id="count">0</span>
+            <span id="count">${0}</span>
+            <button class="del-like" id="dislike"><img src="./heart-crack-solid.svg"></button>
         </div>
         <div>${itemValue[0]}</div>
         <div class="del">
@@ -78,11 +79,23 @@ function appendItem(item) {
         remove(exactLocationOfItemInDB)
     }
 
-    mainDiv.querySelector('#del').addEventListener('click', handleClickDel);
+    mainDiv.querySelector("#del").addEventListener("click", handleClickDel)
 
-    function handleClickLike() {
+    const spanEl = mainDiv.querySelector("#count")
 
-    }
+    mainDiv.querySelector("#like").addEventListener("click", function() {
+        const count = parseInt(spanEl.textContent)
+        let increment = count + 1
+        spanEl.textContent = increment
+    })
+
+    mainDiv.querySelector("#dislike").addEventListener("click", function() {
+        const count = parseInt(spanEl.textContent)
+        if (count > 0) {
+            let decrement = count - 1
+            spanEl.textContent = decrement
+        }
+    })
 
     endorsements.append(mainDiv)
 }
